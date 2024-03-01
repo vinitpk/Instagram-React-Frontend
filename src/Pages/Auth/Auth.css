@@ -1,0 +1,34 @@
+/* Styles for the container of the mobile phone image */
+.home-phone {
+    height: 581.15px; /* Set the height of the container */
+    background-size: 468.32px 634.15px; /* Set the size of the background image */
+}
+
+/* Styles for the semi-transparent overlay for mobile wallpaper effect */
+.mobileWallpaper {
+    background-image: url("images/screenshot1.png"); /* Set initial background image */
+    animation: changeBg 8s infinite; /* Apply animation to change background image */
+    width: 250px; /* Set the width of the overlay */
+    height: 538.15px; /* Set the height of the overlay */
+    top: 25px; /* Position the overlay from the top */
+    right: 59px; /* Position the overlay from the right */
+}
+
+/* Keyframe animation to cycle through different background images */
+@keyframes changeBg {
+    0% {
+        background-image: url("images/screenshot1.png"); /* Set background image at 0% */
+    }
+
+    25% {
+        background-image: url("images/screenshot2.png"); /* Set background image at 25% */
+    }
+
+    50% {
+        background-image: url("images/screenshot3.png"); /* Set background image at 50% */
+    }
+
+    75% {
+        background-image: url("images/screenshot4.png"); /* Set background image at 75% */
+    }
+}
