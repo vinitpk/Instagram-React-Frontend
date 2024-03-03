@@ -45,12 +45,12 @@ const Signin = () => {
                 duration: 8000,
                 isClosable: true,
             });
-            actions.setSubmitting(false);
         }
     }, [user.reqUser]);
 
     const handleSubmit = (values, actions) => {
         dispatch(signinAction(values));
+        // actions.setSubmitting(false);
     };
 
     return (

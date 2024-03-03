@@ -37,6 +37,7 @@ const Signup = () => {
 
     const handleSubmit = (values, actions) => {
         dispatch(signupAction(values));
+        // actions.setSubmitting(false);
     };
 
     useEffect(() => {
@@ -50,7 +51,6 @@ const Signup = () => {
                 duration: 8000,
                 isClosable: true,
             });
-            actions.setSubmitting(false);
         }
     }, [auth.signup]);
 
