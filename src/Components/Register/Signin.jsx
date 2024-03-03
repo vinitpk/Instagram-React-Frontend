@@ -29,10 +29,11 @@ const Signin = () => {
     const toast = useToast();
 
     const token = localStorage.getItem("token");
-    // console.log("token in signin page ", token);
-    // console.log("reqUser -: ", user);
+
     useEffect(() => {
-        if (token) dispatch(getUserProfileAction(token || signin));
+        if (token) {
+            dispatch(getUserProfileAction(token || signin));
+        }
     }, [signin, token]);
 
     useEffect(() => {
@@ -44,12 +45,12 @@ const Signin = () => {
                 duration: 8000,
                 isClosable: true,
             });
+            actions.setSubmitting(false);
         }
     }, [user.reqUser]);
 
     const handleSubmit = (values, actions) => {
         dispatch(signinAction(values));
-        actions.setSubmitting(false);
     };
 
     return (
