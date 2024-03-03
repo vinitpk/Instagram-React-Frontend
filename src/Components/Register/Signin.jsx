@@ -7,7 +7,7 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
@@ -29,13 +29,12 @@ const Signin = () => {
     const toast = useToast();
 
     const token = localStorage.getItem("token");
-
+    //  If the user is already logged in redirect them to
     useEffect(() => {
-        if (token) {
-            dispatch(getUserProfileAction(token || signin));
-        }
+        if (token) dispatch(getUserProfileAction(token || signin));
     }, [signin, token]);
 
+    //
     useEffect(() => {
         if (user?.reqUser?.username && token) {
             navigate(`/${user.reqUser?.username}`);
@@ -50,7 +49,7 @@ const Signin = () => {
 
     const handleSubmit = (values, actions) => {
         dispatch(signinAction(values));
-        // actions.setSubmitting(false);
+        actions.setSubmitting(true);
     };
 
     return (
