@@ -29,8 +29,8 @@ const Signin = () => {
     const toast = useToast();
 
     const token = localStorage.getItem("token");
-    console.log("token in signin page ", token);
-    console.log("reqUser -: ", user);
+    // console.log("token in signin page ", token);
+    // console.log("reqUser -: ", user);
     useEffect(() => {
         if (token) dispatch(getUserProfileAction(token || signin));
     }, [signin, token]);
@@ -48,7 +48,6 @@ const Signin = () => {
     }, [user.reqUser]);
 
     const handleSubmit = (values, actions) => {
-        console.log(values);
         dispatch(signinAction(values));
         actions.setSubmitting(false);
     };
