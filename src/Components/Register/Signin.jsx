@@ -41,7 +41,7 @@ const Signin = () => {
             toast({
                 title: "Login successfull",
                 status: "success",
-                duration: 8000,
+                duration: 5000,
                 isClosable: true,
             });
         }

@@ -78,8 +78,8 @@ const EditProfileForm = () => {
                 isClosable: true,
             });
 
-            // Navigate to user profile
-            navigate(`/${user?.reqUser?.username}`);
+            // Navigate to user profile page after updating details and reload the page
+            window.location.href = `/${user?.reqUser?.username}`;
         },
     });
 
@@ -93,6 +93,17 @@ const EditProfileForm = () => {
             data: { image, id: user.reqUser?.id },
         };
         dispatch(editUserDetailsAction(data));
+        onClose();
+    }
+
+    // Handle profile image remove event
+    async function handleProfileImageRemove(event) {
+        const data = {
+            jwt: token,
+            data: { image:"remove", id: user.reqUser?.id },
+        };
+        dispatch(editUserDetailsAction(data));
+        console.log("removed")
         onClose();
     }
 
@@ -249,6 +260,7 @@ const EditProfileForm = () => {
 
             <ChangeProfilePhotoModal
                 handleProfileImageChange={handleProfileImageChange}
+                handleProfileImageRemove={handleProfileImageRemove}
                 isOpen={isOpen}
                 onClose={onClose}
                 onOpen={onOpen}

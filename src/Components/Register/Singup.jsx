@@ -48,7 +48,7 @@ const Signup = () => {
             toast({
                 title: "Account created successfully",
                 status: "success",
-                duration: 8000,
+                duration: 5000,
                 isClosable: true,
             });
         }

@@ -14,6 +14,7 @@ function ChangeProfilePhotoModal({
     onOpen,
     onClose,
     handleProfileImageChange,
+    handleProfileImageRemove
 }) {
     // Returning JSX code to render the modal with input fields for uploading and removing profile photo
     return (
@@ -42,7 +43,7 @@ function ChangeProfilePhotoModal({
 
                         <hr />
 
-                        <p className="font-bold py-3 text-red-600 text-center">
+                        <p className="font-bold py-3 text-red-600 text-center cursor-pointer" onClick={handleProfileImageRemove}>
                             Remove Photo
                         </p>
                         <hr />

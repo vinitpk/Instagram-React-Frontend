@@ -32,6 +32,7 @@ const HomePage = () => {
             const newIds = reqUser?.following?.map((user) => user.id);
             setUserIds([reqUser?.id, ...newIds]);
             setSuggestedUser(suggetions(reqUser));
+            // console.log("New Ids: ", newIds);
         }
     }, [reqUser]);
 
