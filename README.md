@@ -51,7 +51,16 @@ yarn start
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+##### Home Page
+![HomePage](./readme%20images/HomePage.png)
+##### Profile Page
+![ProfilePage](./readme%20images/ProfilePage.png)
+##### Login
+![Login](./readme%20images/Login.png)
+##### Register
+![Register](./readme%20images/Register.png)
+##### Post
+![Post](./readme%20images/Post.png)
 
 ## Tech Stack
 
