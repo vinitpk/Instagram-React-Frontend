@@ -9,7 +9,6 @@ const SearchUserCard = ({ username, image, setIsSearchVisible }) => {
     // Function to handle navigation when the user card is clicked
     const handleNavigate = () => {
         navigate(`/${username}`); // Navigate to the route with the username
-        setIsSearchVisible(false); // Set isSearchVisible to false after navigation
     };
 
     return (
