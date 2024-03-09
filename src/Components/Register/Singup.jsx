@@ -27,18 +27,36 @@ const validationSchema = Yup.object().shape({
 });
 
 const Signup = () => {
-    const initialValues = { email: "", username: "", password: "", name: "" };
+    const initialValues = {
+        email: "",
+        username: "",
+        password: "",
+        name: "",
+    };
     const dispatch = useDispatch();
     const { auth } = useSelector((store) => store);
     const [isSignup, setIsSignup] = useState(false);
     const navigate = useNavigate();
     const toast = useToast();
-    console.log("auth :-", auth.signup?.username);
 
     const handleSubmit = (values, actions) => {
         dispatch(signupAction(values));
-        actions.setSubmitting(true);
+        actions.setSubmitting(false);
     };
+
+    useEffect(() => {
+        if (auth.signupError && auth.signupError != "") {
+            setIsSignup(true);
+            toast({
+                title: "Error",
+                description: auth.signupError,
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+            });
+            auth.signupError = "";
+        }
+    }, [auth.signupError, handleSubmit]);
 
     useEffect(() => {
         if (auth.signup?.username) {
@@ -48,7 +66,7 @@ const Signup = () => {
             toast({
                 title: "Account created successfully",
                 status: "success",
-                duration: 5000,
+                duration: 3000,
                 isClosable: true,
             });
         }

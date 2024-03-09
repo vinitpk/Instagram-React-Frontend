@@ -7,7 +7,7 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
@@ -22,10 +22,10 @@ const validationSchema = Yup.object().shape({
 });
 
 const Signin = () => {
-    const initialValues = { email: "", password: "" };
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { user, signin } = useSelector((store) => store);
+    const { auth } = useSelector((store) => store);
     const toast = useToast();
 
     const token = localStorage.getItem("token");
@@ -34,22 +34,39 @@ const Signin = () => {
         if (token) dispatch(getUserProfileAction(token || signin));
     }, [signin, token]);
 
-    //
+    const handleSubmit = (values, actions) => {
+        dispatch(signinAction(values));
+        actions.setSubmitting(false);
+    };
+
+    useEffect(() => {
+        if (auth.signinError && auth.signinError !== "") {
+            toast({
+                title: "Error",
+                description: auth.signinError,
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+            });
+            auth.signinError = "";
+        }
+    }, [auth.signinError, handleSubmit]);
+
     useEffect(() => {
         if (user?.reqUser?.username && token) {
             navigate(`/${user.reqUser?.username}`);
             toast({
                 title: "Login successfull",
                 status: "success",
-                duration: 5000,
+                duration: 3000,
                 isClosable: true,
             });
         }
     }, [user.reqUser]);
 
-    const handleSubmit = (values, actions) => {
-        dispatch(signinAction(values));
-        actions.setSubmitting(true);
+    const initialValues = {
+        email: "vikas@gmail.com",
+        password: "12345678",
     };
 
     return (
@@ -117,7 +134,10 @@ const Signin = () => {
                                         </FormControl>
                                     )}
                                 </Field>
-                                <p className="text-center">
+                                <p className="mt-5 text-center font-semibold">
+                                    Demo user: vikas@gmail.com | pass: 12345678
+                                </p>
+                                <p className="mt-5 text-center">
                                     People who use our service may have uploaded
                                     your contact information to Instagram. Learn
                                     More

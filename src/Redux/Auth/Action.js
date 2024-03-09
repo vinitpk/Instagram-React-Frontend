@@ -1,5 +1,5 @@
 import { BASE_API_URL } from "../Config";
-import { SIGN_IN, SIGN_UP } from "./ActionType";
+import { SIGN_IN, SIGN_IN_ERROR, SIGN_UP, SIGN_UP_ERROR } from "./ActionType";
 
 // Action creator function for signing in
 export const signinAction = (data) => async (dispatch) => {
@@ -14,18 +14,23 @@ export const signinAction = (data) => async (dispatch) => {
             },
         });
 
+        if (!res.ok) {
+            // If response is not okay, throw an error
+            throw new Error("Invalid User Name or Password");
+        }
+
         // Extract the JWT token from the response headers
         const token = res.headers.get("Authorization");
 
         // Store the token in local storage
         localStorage.setItem("token", token);
-        console.log("Token from header:", token);
 
         // Dispatch an action to update the Redux store with the signed-in user's token
         dispatch({ type: SIGN_IN, payload: token });
     } catch (error) {
         // Log any errors that occur during the sign-in process
-        console.log("Error:", error);
+        console.log("Error:", error.message);
+        dispatch({ type: SIGN_IN_ERROR, payload: error.message });
     }
 };
 
@@ -43,12 +48,17 @@ export const signupAction = (data) => async (dispatch) => {
 
         // Parse the JSON response to get user data
         const user = await res.json();
+        if (!res.ok) {
+            // If response is not okay, throw an error
+            throw new Error(user.message);
+        }
         console.log("Signup:", user);
 
         // Dispatch an action to update the Redux store with the signed-up user's data
         dispatch({ type: SIGN_UP, payload: user });
     } catch (error) {
-        // Log any errors that occur during the sign-up process
-        console.log("Error:", error);
+        // Dispatch an action to handle the error
+        console.log("Error:", error.message);
+        dispatch({ type: SIGN_UP_ERROR, payload: error.message });
     }
 };
